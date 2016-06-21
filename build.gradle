@@ -1,0 +1,67 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:2.2.0-alpha3'
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.7'
+    }
+}
+
+allprojects {
+    repositories {
+        jcenter()
+        mavenCentral()
+
+        maven {
+            url 'https://oss.sonatype.org/content/repositories/snapshots/'
+        }
+
+        maven {
+            url "https://jitpack.io"
+        }
+
+        maven {
+            url 'https://clojars.org/repo/'
+        }
+    }
+}
+
+ext {
+    minSdk = 16
+    targetSdk = 21
+    buildToolsVersion = '23.0.3'
+    compileSdkVersion = 23
+
+    javaSourceCompatibility = JavaVersion.VERSION_1_7
+    javaTargetCompatibility = JavaVersion.VERSION_1_7
+
+    // Support Library Versions
+    supportLibVersion = '23.4.0'
+
+    // Google Play Services
+
+    // UI Library Versions
+
+    // Utility Library Versions
+    annotatedadapterVersion = '1.1.1'
+    butterknifeVersion = '7.0.1'
+    dagger2Version = '2.1'
+    eventbusVersion = '2.4.0'
+    fragmentargsVersion = '3.0.0'
+    okHttpUrlConnectionVersion = '3.0.0-RC1'
+    parcelablePleaseVersion = '1.0.1'
+    picassoVersion = '2.5.2'
+    picassoOkHttp3DownloaderVersion = '1.0.2'
+    persistentCookieJarVersion = '1c351f68d3'
+    retrofitVersion = '2.0.0-beta4'
+    rxjavaVersion = '1.0.16'
+    rxandroidVersion = '1.0.1'
+
+    // Test Library Versions
+    androidTestVerson = '0.4.1'
+    mockitoCoreVersion = '1.10.19'
+    powermockVersion = '1.6.3'
+}

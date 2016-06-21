@@ -1,0 +1,112 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+
+def versionMajor = 1  // bump for major overhaul changes (no limit)
+def versionMinor = 1  // bump for feature releases (cannot exceed 99)
+def versionPatch = 0  // bump for bugfixes or hotfixes (cannot exceed 99)
+def versionBuild = 0  // bump for betas, etc (cannot exceed 99)
+def MAJOR_MULTIPLIER = 1000000
+def MINOR_MULTIPLIER = 10000
+def PATCH_MULTIPLIER = 100
+def BUILD_MULTIPLIER = 1
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+    defaultConfig {
+        applicationId "com.dpince.soulhunterscompanion"
+        minSdkVersion 16
+        targetSdkVersion rootProject.ext.targetSdk
+        versionCode versionMajor * MAJOR_MULTIPLIER +
+                    versionMinor * MINOR_MULTIPLIER +
+                    versionPatch * PATCH_MULTIPLIER +
+                    versionBuild * BUILD_MULTIPLIER
+
+        if (versionBuild > 0) {
+            // Release candidate builds are considered lower than the final version
+            // (ie 1.0.0 is newer than 1.0.0-RC1)
+            versionCode = versionCode - PATCH_MULTIPLIER
+            versionName "${versionMajor}.${versionMinor}.${versionPatch}-RC${versionBuild}"
+        } else {
+            versionName "${versionMajor}.${versionMinor}.${versionPatch}"
+        }
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/DEPENDENCIES'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/ASL2.0'
+    }
+
+    compileOptions {
+        sourceCompatibility rootProject.ext.javaSourceCompatibility
+        targetCompatibility rootProject.ext.javaTargetCompatibility
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    // Google Support Libraries
+    compile 'com.android.support:appcompat-v7:' + rootProject.ext.supportLibVersion
+    compile 'com.android.support:design:' + rootProject.ext.supportLibVersion
+    compile 'com.android.support:cardview-v7:' + rootProject.ext.supportLibVersion
+    compile 'com.android.support:recyclerview-v7:' + rootProject.ext.supportLibVersion
+    compile 'com.android.support:support-annotations:' + rootProject.ext.supportLibVersion
+
+    // Google Play Services
+
+    // UI Libraries
+
+    // Utility Libraries
+    apt     'com.hannesdorfmann.annotatedadapter:processor:' + rootProject.ext.annotatedadapterVersion
+    compile 'com.hannesdorfmann.annotatedadapter:annotation:' + rootProject.ext.annotatedadapterVersion
+    compile 'com.hannesdorfmann.annotatedadapter:support-recyclerview:' + rootProject.ext.annotatedadapterVersion
+    compile 'com.jakewharton:butterknife:' + rootProject.ext.butterknifeVersion
+    compile 'com.google.dagger:dagger:'+rootProject.ext.dagger2Version
+    apt     'com.google.dagger:dagger-compiler:'+rootProject.ext.dagger2Version
+    compile 'de.greenrobot:eventbus:' + rootProject.ext.eventbusVersion
+    compile 'com.hannesdorfmann.fragmentargs:annotation:' + rootProject.ext.fragmentargsVersion
+    apt     'com.hannesdorfmann.fragmentargs:processor:' + rootProject.ext.fragmentargsVersion
+    compile "com.squareup.okhttp3:okhttp-urlconnection:" + rootProject.ext.okHttpUrlConnectionVersion
+    compile 'com.hannesdorfmann.parcelableplease:annotation:' + rootProject.ext.parcelablePleaseVersion
+    apt     'com.hannesdorfmann.parcelableplease:processor:' + rootProject.ext.parcelablePleaseVersion
+    compile 'com.squareup.picasso:picasso:' + rootProject.ext.picassoVersion
+    compile 'com.jakewharton.picasso:picasso2-okhttp3-downloader:' + rootProject.ext.picassoOkHttp3DownloaderVersion
+    compile 'com.github.franmontiel:PersistentCookieJar:' + rootProject.ext.persistentCookieJarVersion
+    compile 'com.squareup.retrofit2:retrofit:' + rootProject.ext.retrofitVersion
+    compile 'com.squareup.retrofit2:converter-jackson:' + rootProject.ext.retrofitVersion
+    compile 'com.squareup.retrofit2:adapter-rxjava:' + rootProject.ext.retrofitVersion
+    compile 'io.reactivex:rxjava:' + rootProject.ext.rxjavaVersion
+    compile 'io.reactivex:rxandroid:' + rootProject.ext.rxandroidVersion
+    compile 'javax.annotation:javax.annotation-api:1.2'
+
+    // Unit Testing
+    testCompile 'org.mockito:mockito-core:' + rootProject.ext.mockitoCoreVersion
+    testCompile 'org.powermock:powermock-module-junit4:' + rootProject.ext.powermockVersion
+    testCompile 'org.powermock:powermock-module-junit4-rule:' + rootProject.ext.powermockVersion
+    testCompile 'org.powermock:powermock-api-mockito:' + rootProject.ext.powermockVersion
+    testCompile 'org.powermock:powermock-classloading-xstream:' + rootProject.ext.powermockVersion
+    testApt     'com.google.dagger:dagger-compiler:' + rootProject.ext.dagger2Version
+
+    // Instrumentation/UI testing
+    androidTestApt 'com.google.dagger:dagger-compiler:' + rootProject.ext.dagger2Version
+}
