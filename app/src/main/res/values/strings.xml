@@ -1,3 +1,13 @@
 <resources>
+
     <string name="app_name">Soul Hunters Companion</string>
+
+    <!-- Tags -->
+    <string name="tag_menu_header">menu-header</string>
+    <string name="tag_menu_navigation">menu-navigation</string>
+
+    <!-- Misc -->
+    <string name="drawer_open">Open menu</string>
+    <string name="drawer_close">Close menu</string>
+
 </resources>

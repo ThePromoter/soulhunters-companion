@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Spacing -->
+    <dimen name="spacing_large">24dp</dimen>
+    <dimen name="spacing_normal">16dp</dimen>
+    <dimen name="spacing_small">8dp</dimen>
+    <dimen name="spacing_tiny">4dp</dimen>
+
+    <!-- Navigation Menu -->
+    <dimen name="navigation_drawer_width">280dp</dimen>
+    <dimen name="navigation_drawer_header_height">160dp</dimen>
+    <dimen name="navigation_content_spacing">8dp</dimen>
+    <dimen name="navigation_item_top_bottom_padding">6dp</dimen>
+    <dimen name="navigation_item_height">48dp</dimen>
+    <dimen name="navigation_icon_size">24dp</dimen>
+
+</resources>
